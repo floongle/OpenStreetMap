@@ -1,0 +1,25 @@
+meta
+{
+    title: "Surfaces";
+    version: "1";
+    author: "Floongle";
+    description: "Highlights highways without surface information";
+    link: "https://josm.openstreetmap.de/wiki/Styles/Coloured_Kerbs";
+    min-josm-version: "5801";
+}
+
+way[surface=gravel] {
+    repeat-image: "gravel.svg";
+    repeat-image-align: top;
+}
+
+way[surface=asphalt] {
+    repeat-image: "asphalt.svg";
+    repeat-image-align: top;
+}
+way[!surface][highway], way[!surface][footway], way[!surface][path], way[!surface][cycleway] {
+    repeat-image: "missing.svg";
+    repeat-image-align: center;
+	 casing-width: 5;
+  casing-color: red;
+}

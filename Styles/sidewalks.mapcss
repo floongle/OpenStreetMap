@@ -1,0 +1,36 @@
+meta
+{
+    title: "Sidewalks";
+    version: "1";
+    author: "floongle";
+    description: "Highlights when highways don't have sidewalk details";
+    min-josm-version: "5801";
+}
+
+way[!sidewalk][highway=primary] {
+    repeat-image-align: top;
+	casing-width: 2;
+  casing-color: orange;
+}
+
+way[!sidewalk][highway=primary_link] {
+    repeat-image-align: top;
+	casing-width: 2;
+  casing-color: orange;
+}
+
+way[!sidewalk][highway=residential] {
+    repeat-image-align: top;
+	casing-width: 2;
+  casing-color: orange;
+}
+way[!sidewalk][highway=service] {
+    repeat-image-align: top;
+	casing-width: 2;
+  casing-color: orange;
+}
+way[!sidewalk][highway=tertiary] {
+    repeat-image-align: top;
+	casing-width: 2;
+  casing-color: orange;
+}
