@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet PHP/MBTiles Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+</head>
+<body>
+	<p> This is a test map for Hedge surveying. It takes a copy of OpenStreetMap data (that already has some hedges on it). I've marked one hedge as red as a proof of concept.</p>
+	<p> Next steps are to: </p>
+        <ul>
+		<li> Automate the rendering of these map tiles</li>
+		<li> Agree what we want to map</li>
+		<li> Start mapping</li>
+		<li> Make this page usable on mobile devices (and make it a bit prettier)</li>
+	</ul>
+	<div id="map" style="width: 1000px; height: 1000px"></div>
+    </p>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+	<script>
+		var map;
+
+		var mapquestOSM = new L.TileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+			maxZoom: 17,
+			subdomains: ["otile1", "otile2", "otile3", "otile4"],
+			attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+		});
+
+		var mapquestOAM = new L.TileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
+			maxZoom: 17,
+			subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
+			attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+		});
+
+		var hostedTiles = new L.tileLayer('tiles1/{z}/{x}/{y}.png', {
+		    tms: false,
+		    attribution: 'Tiles Courtesy of <a href="http://tiles.mapbox.com/mapbox/map/geography-class" target="_blank">MapBox</a>',
+		    subdomains: ["a", "b", "c", "d"],
+		    opacity: 0.7
+		});
+
+		var mbTiles = new L.tileLayer('mbtiles.php?db=tiles1.mbtiles&z={z}&x={x}&y={y}', {
+		    tms: true,
+		    attribution: 'Tiles Courtesy of <a href="http://tiles.mapbox.com/mapbox/map/geography-class" target="_blank">MapBox</a>',
+		    opacity: 0.7
+		});
+
+		map = new L.Map("map",{
+			zoom: 14,
+            center: [51.545351, -0.722228],
+			layers: [ mbTiles]
+		});
+
+		var baseLayers = {
+			"MapQuest Streets": mapquestOSM,
+		};
+		var overlays = {
+			"Local MBTiles File": mbTiles,
+			"Hosted Tiles": hostedTiles
+		};
+
+		layersControl = new L.Control.Layers(baseLayers, overlays, {
+			collapsed: false
+		});
+
+//		map.addControl(layersControl);
+	</script>
+</body>
+</html>
